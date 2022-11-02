@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import HomePic from "./GIF.gif";
+import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 
 const CoverVideo = () => {
   const VideoContainer = styled.div`
@@ -10,9 +13,10 @@ const CoverVideo = () => {
       height: auto;
     }
   `;
+
   return (
     <VideoContainer>
-      <video src={HomePic} typeof="video/mp4" autoPlay muted loop></video>
+      <img src="images/Home GIF.gif" />
     </VideoContainer>
   );
 };

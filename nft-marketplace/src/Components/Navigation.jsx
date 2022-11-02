@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "../Assets/Button";
+import WhiteButton from "../Assets/WhiteButton";
 import Logo from "../Assets/Logo";
 const Navigation = () => {
   const Section = styled.section`
@@ -37,6 +38,7 @@ const Navigation = () => {
       width: 100%;
     }
   `;
+
   return (
     <Section>
       <NavBar>
@@ -44,12 +46,14 @@ const Navigation = () => {
         <Menu>
           <MenuItem>Home</MenuItem>
           <MenuItem>About</MenuItem>
-          <MenuItem>Roadmap</MenuItem>
-          <MenuItem>Showcase</MenuItem>
-          <MenuItem>Team</MenuItem>
-          <MenuItem>Faq</MenuItem>
+          <MenuItem>Products</MenuItem>
+          <MenuItem>cart</MenuItem>
         </Menu>
-        <Button link={"http://google.com"} text="Connect Wallet" />
+        <div>
+          {" "}
+          <WhiteButton text="Login" />
+          <Button text="Register"></Button>
+        </div>
       </NavBar>
     </Section>
   );
