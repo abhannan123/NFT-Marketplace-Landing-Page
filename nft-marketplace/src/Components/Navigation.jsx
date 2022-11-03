@@ -26,7 +26,7 @@ const Navigation = () => {
     margin: 0 1rem;
     color: ${(props) => props.theme.text};
     cursor: pointer;
-    & ::after {
+    &:after {
       content: "";
       display: block;
       width: 0%;
@@ -34,7 +34,7 @@ const Navigation = () => {
       background-color: ${(props) => props.theme.text};
       transition: width 0.3s ease;
     }
-    &:hover::after {
+    &:hover:after {
       width: 100%;
     }
   `;
@@ -47,7 +47,7 @@ const Navigation = () => {
           <MenuItem>Home</MenuItem>
           <MenuItem>About</MenuItem>
           <MenuItem>Products</MenuItem>
-          <MenuItem>cart</MenuItem>
+          <MenuItem>Cart</MenuItem>
         </Menu>
         <div>
           {" "}

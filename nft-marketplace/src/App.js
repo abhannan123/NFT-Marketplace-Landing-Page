@@ -6,6 +6,7 @@ import GlobalStyles from "./Styles/GlobalStyles";
 
 import Footer from "./Components/Footer";
 import { light } from "./Styles/Themes";
+import RoadMap from "./Components/Sections/RoadMap";
 function App() {
   return (
     <>
@@ -14,7 +15,7 @@ function App() {
         <Navigation />
         <Home />
         <About />
-
+        <RoadMap />
         <Footer />
       </ThemeProvider>
     </>
