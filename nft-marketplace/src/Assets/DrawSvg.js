@@ -7,7 +7,7 @@ import Vector from "./Vector";
 const VectorContainer = styled.div`
 position:absolute;
 top:0.5rem;
-left:70%;
+left:50%;
 transform:translateX(-50%)
 width:100%;
 height:100%;
@@ -16,6 +16,9 @@ svg{
     width:100%;
     height:100%;
 
+}
+@media(max-width:48em){
+  display:none;
 }
 
 `;
@@ -26,7 +29,7 @@ to{transform:translateX(-50%)scale(1);}`;
 const Ball = styled.div`
   position: absolute;
   top: 0.2rem;
-  left: 72%;
+  left: 52%;
   transform: translateX(-50%);
   width: 1.5rem;
   height: 1.5rem;

@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 const Product = () => {
   const ProductContainer = styled.div`
-    width: 300px;
-    height: 350px;
     img {
       width: 100%;
       height: 200px;
@@ -12,6 +10,10 @@ const Product = () => {
     }
     border: 1px solid ${(props) => props.theme.text};
     border-radius: 15px;
+    @media (max-width: 64em) {
+      margin: 0 auto;
+    }
+    /* margin: 10px auto; */
   `;
   const ProductDescription = styled.div`
     display: flex;
@@ -40,7 +42,7 @@ const Product = () => {
     outline: none;
     border: 2px solid ${(props) => props.theme.text};
     font-size: ${(props) => props.theme.fontsm};
-    padding: 0.9rem 2.3rem;
+    padding: 20px 20px;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -65,6 +67,12 @@ const Product = () => {
     }
     margin-top: 20px;
     margin-left: 26px;
+    margin-bottom: 20px;
+    @media (max-width: 64em) {
+      padding: 5px 5px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
   `;
   const images = [
     "images/download.jpeg",

@@ -1,16 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import HomePic from "./GIF.gif";
-import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 
 const CoverVideo = () => {
   const VideoContainer = styled.div`
-    width: 100%;
-    video {
+    width: 50%;
+    img {
       width: 100%;
       height: auto;
+    }
+    @media (max-width: 64em) {
+      min-width: 40vh;
     }
   `;
 

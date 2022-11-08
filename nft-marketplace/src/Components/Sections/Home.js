@@ -4,6 +4,7 @@ import CoverVideo from "../../Assets/CoverVideo";
 import FeaturedTypeWrite from "../../Assets/FeaturedTypeWrite";
 import Product from "../../Assets/Product";
 import TypeWriterText from "../../Assets/TypeWriterText";
+import About from "./About";
 
 const Home = () => {
   const Section = styled.section`
@@ -20,6 +21,17 @@ const Home = () => {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 50px;
+    @media (max-width: 64em) {
+      width: 85%;
+    }
+    @media (max-width: 48em) {
+      flex-direction: column-reverse;
+      & > *:first-child {
+        width: 100%;
+        margin-top: 2rem;
+      }
+    }
   `;
   const Box = styled.div`
     width: 50%;
@@ -37,7 +49,7 @@ const Home = () => {
   `;
   const ProductBox = styled.div`
     width: 60%;
-    height: 100%;
+    /* height: 100%; */
     display: grid;
     /* flex-direction: column; */
     grid-template-columns: repeat(2, 1fr);
@@ -46,9 +58,17 @@ const Home = () => {
     gap: 30px;
     align-items: center;
     margin-top: 70px;
+    @media (max-width: 64em) {
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
+    }
+    @media (max-width: 30em) {
+      grid-template-columns: repeat(1, 1fr);
+      width: 100%;
+    }
   `;
   return (
-    <Section>
+    <Section id="Home">
       <Container>
         <Box>
           <TypeWriterText />
@@ -66,6 +86,9 @@ const Home = () => {
           <Product />
         </ProductBox>
       </Container>
+      <div>
+        <About />
+      </div>
     </Section>
   );
 };
