@@ -5,6 +5,10 @@ import FeaturedTypeWrite from "../../Assets/FeaturedTypeWrite";
 import Product from "../../Assets/Product";
 import TypeWriterText from "../../Assets/TypeWriterText";
 import About from "./About";
+import ShowCase from "./ShowCase";
+import useWindowSize from "react-use/lib/useWindowSize";
+
+import Confetti from "react-confetti";
 
 const Home = () => {
   const Section = styled.section`
@@ -67,8 +71,11 @@ const Home = () => {
       width: 100%;
     }
   `;
+  const { width, height } = useWindowSize();
+
   return (
     <Section id="Home">
+      <Confetti width={width} height={height} gravity={0.1}></Confetti>
       <Container>
         <Box>
           <TypeWriterText />
@@ -78,6 +85,7 @@ const Home = () => {
           <CoverVideo />
         </Box>
       </Container>
+
       <Container>
         <FeatureBox>
           <FeaturedTypeWrite />
@@ -86,8 +94,10 @@ const Home = () => {
           <Product />
         </ProductBox>
       </Container>
+
       <div>
         <About />
+        {/* <ShowCase /> */}
       </div>
     </Section>
   );

@@ -26,7 +26,10 @@ const Navigation = () => {
       .mobile {
         display: flex;
         flex-direction: column;
-        margin-bottom: 20px;
+        div {
+          margin-bottom: 20px;
+        }
+        /* justify-content: space-between; */
       }
     }
   `;
@@ -143,7 +146,9 @@ const Navigation = () => {
           <MenuItem>
             <div className="mobile">
               {" "}
-              <WhiteButton text="Login" />
+              <div>
+                <WhiteButton text="Login" />
+              </div>
               <Button text="Register"></Button>
             </div>
           </MenuItem>

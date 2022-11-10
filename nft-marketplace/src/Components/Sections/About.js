@@ -51,16 +51,23 @@ const About = () => {
     @media (max-width: 40em) {
       min-height: 50vh;
     }
+    button {
+      margin-right: auto;
+      margin-left: 55px;
+    }
   `;
 
   const Title = styled.h2`
     font-size: ${(props) => props.theme.fontxxl};
     text-transform: capitalize;
     width: 80%;
+    line-height: 1.5;
+
     color: ${(props) => props.theme.body};
     align-self: flex-start;
     margin: 1rem auto;
     font-weight: 400;
+    letter-spacing: 3px;
 
     @media (max-width: 64em) {
       width: 100%;
@@ -75,14 +82,11 @@ const About = () => {
   `;
   const SubText = styled.p`
     font-size: ${(props) => props.theme.fontlg};
-  Line 70:11:  img elements must have an alt prop, either with meaningful text, or an empty string for decorative images  jsx-a11y/alt-text
-  Line 74:11:  img elements must have an alt prop, either with meaningful text, or an empty string for decorative images  jsx-a11y/alt-text
-  Line 77:11:  img elements must have an alt prop, either with meaningful text, or an empty string for decorative images  jsx-a11y/alt-text
-  Line 80:11:  img elements must have an alt prop, either with meaningful text, or an empty string for decorative images  jsx-a11y/alt-text
-  Line 83:11:  img elements must have an alt prop, either with meaningful text, or an empty string for decorative images  jsx-a11y/alt-text
-  Line 86:11:  img elements must have an alt prop, either with meaningful text, or an empty string for decorative images  jsx-a11y/alt-text
     text-transform: capitalize;
     width: 80%;
+    letter-spacing: 2px;
+
+    line-height: 2.5;
     color: ${(props) => props.theme.body};
     align-self: flex-start;
     margin: 1rem auto;
@@ -90,7 +94,6 @@ const About = () => {
       width: 100%;
       text-align: center;
       font-size: ${(props) => props.theme.fontmd};
-
     }
     @media (max-width: 40em) {
       font-size: ${(props) => props.theme.fontmd};
@@ -103,8 +106,11 @@ const About = () => {
     font-size: ${(props) => props.theme.fontlg};
     text-transform: capitalize;
     width: 80%;
+    letter-spacing: 2px;
+
     color: ${(props) => `rgba(${props.theme.bodyRgba},0.6)`};
     align-self: flex-start;
+    line-height: 2.5;
     margin: 1rem auto;
     @media (max-width: 64em) {
       width: 100%;
