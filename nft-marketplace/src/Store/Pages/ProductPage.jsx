@@ -1,16 +1,13 @@
 import React from "react";
-
 import styled from "styled-components";
-
-import Categories from "./Categories";
-
+import Product from "../../Assets/Product";
 const Container = styled.div`
   width: 75%;
   margin: 2rem auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   /* grid-template-rows: repeat(2, 1fr); */
-
+  gap: 30px;
   /* display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,21 +26,12 @@ const Container = styled.div`
     grid-template-columns: repeat(1, 1fr);
   }
 `;
-const CategoriesPage = () => {
-  const images = [
-    "images/download.jpeg",
-    "images/download.jpeg",
-    "images/download.jpeg",
-    "images/download.jpeg",
-    "images/download.jpeg",
-  ];
+const ProductPage = () => {
   return (
     <Container>
-      {images.map((img) => (
-        <Categories img={img} />
-      ))}
+      <Product />
     </Container>
   );
 };
 
-export default CategoriesPage;
+export default ProductPage;

@@ -2,7 +2,7 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 
 const Section = styled.section`
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   background-color: ${(props) => props.theme.text};
   display: flex;
@@ -10,7 +10,7 @@ const Section = styled.section`
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-top: 40px;
+  /* margin-top: 40px; */
   & > *:first-child {
     animation-duration: 20s;
     @media (max-width: 30em) {
