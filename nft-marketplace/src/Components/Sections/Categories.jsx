@@ -12,7 +12,7 @@ const ImgContainer = styled.div`
       transform: translateY(-2rem) scale(1);
     }
   }
-
+  /* border-radius: 50px; */
   position: relative;
   cursor: pointer;
   img {
@@ -23,13 +23,17 @@ const ImgContainer = styled.div`
 const Name = styled.h2`
   font-size: ${(props) => props.theme.fontxl};
   position: absolute;
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: center; */
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
   text-transform: uppercase;
-  top: 40%;
-  left: 25%;
-  border-bottom: 2px solid ${(props) => props.theme.body};
+  top: 50%;
+  padding: 0 auto;
+  /* left: 20%; */
+  /* right: 50%; */
+  /* left: 25%; */
+  /* right: 40%; */
+  /* border-bottom: 2px solid ${(props) => props.theme.body}; */
   color: ${(props) => props.theme.body};
 `;
 const Position = styled.h2`
@@ -49,13 +53,14 @@ const Position = styled.h2`
 const Categories = ({
   img = "images/Nfts/bighead-2.svg",
   name = "hanna",
-  description = "name",
+  description = "",
+  id,
 }) => {
   return (
     <ImgContainer>
-      <img src={img} />
+      <img src={img} id={id} />
       <Name>{name}</Name>
-      <Position>{description}</Position>
+      {/* <Position>{description}</Position> */}
     </ImgContainer>
   );
 };

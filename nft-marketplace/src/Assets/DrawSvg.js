@@ -55,7 +55,6 @@ const DrawSvg = () => {
         start: "top center",
         end: "bottom bottom",
         onUpdate: (self) => {
-          // console.log({ self });
           const draw = length * self.progress;
           svg.style.strokeDashoffset = length - draw;
         },

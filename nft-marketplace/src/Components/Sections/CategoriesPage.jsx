@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
-
+import axios from "axios";
 import Categories from "./Categories";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
-  width: 75%;
+  width: 85%;
   margin: 2rem auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -15,6 +16,9 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap; */
+  @media (max-width: 70em) {
+    grid-template-columns: repeat(3, 1fr);
+  }
   @media (max-width: 64em) {
     grid-template-columns: repeat(3, 1fr);
 
@@ -30,17 +34,42 @@ const Container = styled.div`
   }
 `;
 const CategoriesPage = () => {
-  const images = [
-    "images/download.jpeg",
-    "images/download.jpeg",
-    "images/download.jpeg",
-    "images/download.jpeg",
-    "images/download.jpeg",
-  ];
+  const [categories, setCategories] = useState([]);
+  const URL = `https://ecommercetestproject.herokuapp.com/api`;
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const response = await axios.get(`${URL}/categories`);
+
+        setCategories(response?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCategories();
+  }, []);
+
+  // useEffect(()=>{
+  //   categories.map(())
+  // },[categories])
+  // const images = [
+  //   "images/download.jpeg",
+  //   "images/download.jpeg",
+  //   "images/download.jpeg",
+  //   "images/download.jpeg",
+  //   "images/download.jpeg",
+  // ];
   return (
     <Container>
-      {images.map((img) => (
-        <Categories img={img} />
+      {categories.map((data) => (
+        <Link to={`/categories/${data?.id}`}>
+          <Categories
+            img={"/images/resource-database-hXh9yUI1rho-unsplash.jpg"}
+            name={data?.name}
+            id={data?.id}
+          />
+        </Link>
       ))}
     </Container>
   );

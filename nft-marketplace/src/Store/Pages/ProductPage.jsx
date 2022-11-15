@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Product from "../../Assets/Product";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 const Container = styled.div`
   width: 75%;
   margin: 2rem auto;
@@ -27,9 +29,35 @@ const Container = styled.div`
   }
 `;
 const ProductPage = () => {
+  const [products, setProducts] = useState([]);
+  const URL = `https://ecommercetestproject.herokuapp.com/api`;
+  const { id } = useParams();
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const response = await axios.get(`${URL}/categories/${id}`);
+
+        setProducts(response?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProducts();
+  }, []);
+
   return (
     <Container>
-      <Product />
+      {products?.map((data) => (
+        <Link to={`/products/${data?.id}`}>
+          <Product
+            Product={data?.title}
+            Price={data?.price}
+            img={data?.image_url}
+            id={data?.id}
+          />
+        </Link>
+      ))}
     </Container>
   );
 };
