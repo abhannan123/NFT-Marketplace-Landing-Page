@@ -56,7 +56,7 @@ const Home = () => {
     /* height: 100%; */
     display: grid;
     /* flex-direction: column; */
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     /* grid-template-rows:repeat(2, 1fr) */
 
     gap: 30px;
@@ -72,10 +72,17 @@ const Home = () => {
     }
   `;
   const { width, height } = useWindowSize();
-
+  const images = [
+    "images/download.jpeg",
+    "images/download.jpeg",
+    "images/download.jpeg",
+    "images/download.jpeg",
+    "images/download.jpeg",
+    "images/download.jpeg",
+  ];
   return (
     <Section id="Home">
-      <Confetti width={width} height={height} gravity={0.1}></Confetti>
+      {/* <Confetti width={width} height={height} gravity={0.1}></Confetti> */}
       <Container>
         <Box>
           <TypeWriterText />
@@ -91,7 +98,9 @@ const Home = () => {
           <FeaturedTypeWrite />
         </FeatureBox>
         <ProductBox>
-          <Product />
+          {images.map((images) => (
+            <Product img={images} />
+          ))}
         </ProductBox>
       </Container>
 

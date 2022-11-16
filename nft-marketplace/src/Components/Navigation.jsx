@@ -141,8 +141,9 @@ const Navigation = () => {
           <Link to="/categories">
             <MenuItem>Categories</MenuItem>
           </Link>
-
-          <MenuItem>Cart</MenuItem>
+          <Link to="/cart">
+            <MenuItem>Cart</MenuItem>
+          </Link>
           <MenuItem>
             <div className="mobile">
               {" "}
