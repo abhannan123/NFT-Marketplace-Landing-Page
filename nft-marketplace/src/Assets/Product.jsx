@@ -1,6 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-const Product = () => {
+
+const Product = ({
+  img = "images/download.jpeg",
+  Product = "Title",
+  Price = "40",
+  id,
+  addCart = false,
+}) => {
   const ProductContainer = styled.div`
     img {
       width: 100%;
@@ -21,6 +28,7 @@ const Product = () => {
     margin-top: 20px;
     margin-left: 20px;
     margin-right: 20px;
+    margin-bottom: 20px;
   `;
   const ProductTitle = styled.p`
   font-size:${(props) => props.theme.fontsm}
@@ -74,28 +82,17 @@ const Product = () => {
       margin-bottom: 5px;
     }
   `;
-  const images = [
-    "images/download.jpeg",
-    "images/download.jpeg",
-    "images/download.jpeg",
-    "images/download.jpeg",
-    "images/download.jpeg",
-  ];
 
   return (
     <>
-      {images.map((item) => {
-        return (
-          <ProductContainer>
-            <img src={item} />
-            <ProductDescription>
-              <ProductTitle>Product title</ProductTitle>
-              <ProductPrice>$40</ProductPrice>
-            </ProductDescription>
-            <CartButton>Add To Cart</CartButton>
-          </ProductContainer>
-        );
-      })}
+      <ProductContainer>
+        <img src={img} />
+        <ProductDescription>
+          <ProductTitle>Product title</ProductTitle>
+          <ProductPrice>$40</ProductPrice>
+        </ProductDescription>
+        {addCart && <CartButton>Add To Cart</CartButton>}
+      </ProductContainer>
     </>
   );
 };
