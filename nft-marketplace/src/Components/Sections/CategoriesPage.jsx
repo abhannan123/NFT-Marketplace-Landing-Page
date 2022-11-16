@@ -1,11 +1,12 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
 
 import Categories from "./Categories";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
-  width: 75%;
+  width: 85%;
   margin: 2rem auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -30,6 +31,21 @@ const Container = styled.div`
   }
 `;
 const CategoriesPage = () => {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const response = await axios.get(
+          "https://ecommercetestproject.herokuapp.com/api/categories"
+        );
+        setCategories(response?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProducts();
+  }, []);
+  console.log({ categories });
   const images = [
     "images/download.jpeg",
     "images/download.jpeg",
@@ -39,8 +55,14 @@ const CategoriesPage = () => {
   ];
   return (
     <Container>
-      {images.map((img) => (
-        <Categories img={img} />
+      {categories.map((img) => (
+        <Link to={`/categories/${img?.id}`}>
+          <Categories
+            img={"/images/resource-database-hXh9yUI1rho-unsplash.jpg"}
+            name={img?.name}
+            id={img?.id}
+          />
+        </Link>
       ))}
     </Container>
   );

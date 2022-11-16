@@ -13,6 +13,7 @@ import { Route, Routes } from "react-router-dom";
 import CategoriesPage from "./Components/Sections/CategoriesPage";
 import ProductPage from "./Store/Pages/ProductPage";
 import SingleProductPage from "./Store/Pages/SingleProductPage";
+import Cart from "./Store/Pages/Cart";
 function App() {
   return (
     <>
@@ -23,8 +24,9 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/about" element={<About />} />
           <Route exact path="/categories" element={<CategoriesPage />} />
-          <Route exact path="/product" element={<ProductPage />} />
-          <Route exact path="/singleProduct" element={<SingleProductPage />} />
+          <Route exact path={`categories/:id`} element={<ProductPage />} />
+          <Route exact path={`products/:id`} element={<SingleProductPage />} />
+          <Route exact path="/cart" element={<Cart />} />
         </Routes>
         <Footer />
       </ThemeProvider>

@@ -28,8 +28,8 @@ const Name = styled.h2`
   /* justify-content: center; */
   text-transform: uppercase;
   top: 40%;
-  left: 25%;
-  border-bottom: 2px solid ${(props) => props.theme.body};
+  /* left: 25%; */
+  /* border-bottom: 2px solid ${(props) => props.theme.body}; */
   color: ${(props) => props.theme.body};
 `;
 const Position = styled.h2`
