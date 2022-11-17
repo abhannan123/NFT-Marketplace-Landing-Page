@@ -29,7 +29,7 @@ const ProductTitle = styled.div`
   font-size: ${(props) => props.theme.fontsm};
   letter-spacing: 2px;
   white-space: nowrap;
-  width: 120px;
+  width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-left: 30px;
@@ -107,18 +107,23 @@ const Items = ({
     setCartItems((prev) => {
       let copyPrev = [...prev];
 
+      console.log({ prev });
       copyPrev.splice(index, 1);
       setCookie("product", JSON.stringify(copyPrev));
+
       return copyPrev;
     });
+
+    // setPrice(Product_price * Product_quantity);
   };
+
   return (
     <SubContainer>
       <ImageBox>
         <img src={PRoduct_image || ""} alt="" />
         <ProductTitle>
           <span>{Product_Name || ""}</span>
-          <div>${price}</div>
+          <div>${Product_price}</div>
         </ProductTitle>
       </ImageBox>
       <SemiContainer>

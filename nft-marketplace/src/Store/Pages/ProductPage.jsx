@@ -66,20 +66,28 @@ const ProductPage = () => {
     };
     getProducts();
   }, []);
-
+  console.log({ products });
   return (
-    <Container>
-      {products?.map((data) => (
-        <Link to={`/products/${data?.id}`}>
-          <Product
-            Product={data?.title}
-            Price={data?.price}
-            img={data?.image_url}
-            id={data?.id}
-          />
-        </Link>
-      ))}
-    </Container>
+    <>
+      {products.length > 0 ? (
+        <Container>
+          {products?.map((data) => (
+            <Link to={`/products/${data?.id}`}>
+              <Product
+                title={data?.title}
+                price={data?.price}
+                img={data?.image_url}
+                id={data?.id}
+              />
+            </Link>
+          ))}
+        </Container>
+      ) : (
+        <NoConatinerForm>
+          <NoProductTitle>There are No Products </NoProductTitle>
+        </NoConatinerForm>
+      )}
+    </>
   );
 };
 

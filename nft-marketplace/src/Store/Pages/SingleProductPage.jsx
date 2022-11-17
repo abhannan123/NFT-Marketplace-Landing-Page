@@ -7,6 +7,10 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { setCookie, getCookie } from "../../cookies/Cookies";
 
+const CartSection = styled.div`
+  width: 85%;
+  margin: auto;
+`;
 const Section = styled.section`
   /* min-height: ${(props) => `calc(100vh-${props.theme.navHeight})`}; */
   width: 100vw;
@@ -17,7 +21,7 @@ const Section = styled.section`
 const Container = styled.div`
   width: 80%;
 
-  margin: 0 auto;
+  /* margin: 0 auto; */
   margin-bottom: 30px;
   div {
     width: 100%;
@@ -197,7 +201,7 @@ const SingleProductPage = () => {
     setCookie("product", JSON.stringify(newCartItems));
     navigate("/cart");
   };
-  console.log({ data });
+
   const settings = {
     dots: true,
     infinite: true,
@@ -207,37 +211,39 @@ const SingleProductPage = () => {
   };
 
   return (
-    <Section>
-      <Container>
-        <Slider {...settings}>
-          <div>
-            <img src={data?.image_url} alt="" />
-          </div>
-          {/* <div>
+    <CartSection>
+      <Section>
+        <Container>
+          <Slider {...settings}>
+            <div>
+              <img src={data?.image_url} alt="" />
+            </div>
+            {/* <div>
             {" "}
             <img src="/images/nonfungible-token-nft.jpg" alt="" />
           </div> */}
-        </Slider>
-      </Container>
-      <ContainerBox>
-        <DescriptionBox>
-          <ProductTitle>{data?.title}</ProductTitle>
-          <SubTextLight>{data?.descripiton}</SubTextLight>
-        </DescriptionBox>
-        <ProductBox>
-          <div>
-            <span> Quantity</span>
-            <span>{data?.quantity}</span>
-          </div>
-          <div>
-            <span>Price</span>
-            <span>$ {data?.price}</span>
-          </div>
+          </Slider>
+        </Container>
+        <ContainerBox>
+          <DescriptionBox>
+            <ProductTitle>{data?.title}</ProductTitle>
+            <SubTextLight>{data?.descripiton}</SubTextLight>
+          </DescriptionBox>
+          <ProductBox>
+            <div>
+              <span> Quantity</span>
+              <span>{data?.quantity}</span>
+            </div>
+            <div>
+              <span>Price</span>
+              <span>$ {data?.price}</span>
+            </div>
 
-          <CartButton onClick={handleCart}>Add To Cart</CartButton>
-        </ProductBox>
-      </ContainerBox>
-    </Section>
+            <CartButton onClick={handleCart}>Add To Cart</CartButton>
+          </ProductBox>
+        </ContainerBox>
+      </Section>
+    </CartSection>
   );
 };
 
