@@ -32,6 +32,9 @@ const Product = ({
   font-size:${(props) => props.theme.fontsm}
   text-transform: capitalize;
   color: ${(props) => props.theme.text};
+  width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   `;
   const ProductPrice = styled.p`
     color: ${(props) => props.theme.text};

@@ -3,6 +3,13 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { getCookie } from "../../cookies/Cookies";
 import Items from "./Items";
+import axios from "axios";
+import { toast } from "react-toastify";
+
+const CartSection = styled.div`
+  width: 85%;
+  margin: auto;
+`;
 const Section = styled.div`
   display: flex;
   @media (max-width: 70em) {
@@ -44,7 +51,7 @@ const ConatinerForm = styled.div`
     margin-bottom: 40px;
     input {
       height: 60px;
-      width: 80%;
+      width: 72%;
     }
   }
   .csv {
@@ -183,11 +190,11 @@ const Cart = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
 
   const [cartItems, setCartItems] = useState(
     (getCookie("product") && JSON.parse(getCookie("product"))) || []
   );
+  const [orderDetail, setOrderDetail] = useState([]);
   const [total, setTotal] = useState(0);
   useEffect(() => {
     const price = cartItems.map(
@@ -201,95 +208,138 @@ const Cart = () => {
       totPrice += price[i];
     }
     setTotal(totPrice);
+    const order = cartItems.map(
+      ({ Product_price, Product_id, Product_quantity }, index) => {
+        return {
+          product_id: Product_id,
+          quantity: Product_quantity,
+          price: Product_price,
+        };
+      }
+    );
+    setOrderDetail(order);
   }, [cartItems]);
 
+  const setOrder = async (data) => {
+    const order = {
+      first_name: data?.firstName,
+      last_name: data?.lastName,
+      address: data?.address,
+      card_number: data?.card_number,
+      phone_number: data?.number,
+      total_price: total,
+      order_details_attributes: orderDetail,
+    };
+
+    try {
+      const response = axios
+        .post("https://ecommercetestproject.herokuapp.com/api/orders", order)
+        .then((data) => {
+          toast.success(data?.data?.message);
+          // console.log();
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onSubmit = (data) => {
+    // console.log(data);
+    setOrder(data);
+  };
+
   return (
-    <Section>
-      {cartItems.length > 0 ? (
-        <>
-          <ConatinerForm>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <FormName>Shipping Form</FormName>
-              <div>
-                <span>First Name</span>
-                <input
-                  type="text"
-                  {...register("firstName", { required: true, maxLength: 20 })}
-                />
-                {errors.firstName && <p>First name is required.</p>}
-                <span>Last Name</span>
-                <input type="text" {...register("lastName")} />
-              </div>
-              <div className="number">
-                <span>Number#</span>
-                <input type="text" {...register("number")} />
-              </div>
-              <div className="address">
-                <span>Adress</span>
-                <input
-                  type="text"
-                  {...register("address", { required: true, maxLength: 150 })}
-                />
-                {errors.address && <p>Address is required.</p>}
-              </div>
-              <div className="card">
-                <span>card Number</span>
-
-                <input
-                  type="text"
-                  {...register("card_number", {
-                    required: true,
-                    maxLength: 11,
-                  })}
-                />
-                {errors.card_number && <p>Card Number is required.</p>}
-
-                <span>CSV</span>
-                <input
-                  type="text"
-                  className="csv"
-                  {...register("csv", { required: true, maxLength: 3 })}
-                />
-                {errors.csv && <p>csv is required.</p>}
-              </div>
-              <CartButton onClick={handleSubmit}>Place Order</CartButton>
-            </form>
-          </ConatinerForm>
-          <Container>
-            <ProductConatiner>
-              {cartItems.map(
-                (
-                  {
-                    PRoduct_image,
-                    Product_Name,
-                    Product_price,
-                    Product_quantity,
-                  },
-                  index
-                ) => (
-                  <Items
-                    PRoduct_image={PRoduct_image}
-                    Product_Name={Product_Name}
-                    Product_price={Product_price}
-                    Product_quantity={Product_quantity}
-                    setCartItems={setCartItems}
-                    index={index}
+    <CartSection>
+      <Section>
+        {cartItems.length > 0 ? (
+          <>
+            <ConatinerForm>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <FormName>Shipping Form</FormName>
+                <div>
+                  <span>First Name</span>
+                  <input
+                    type="text"
+                    {...register("firstName", {
+                      required: true,
+                      maxLength: 20,
+                    })}
                   />
-                )
-              )}
-              <PriceConatiner>
-                <ProductTitle>Total</ProductTitle>
-                <div>${total}</div>
-              </PriceConatiner>
-            </ProductConatiner>
-          </Container>
-        </>
-      ) : (
-        <NoConatinerForm>
-          <NoProductTitle>The cart is empty</NoProductTitle>
-        </NoConatinerForm>
-      )}
-    </Section>
+                  {errors.firstName && <p>First name is required.</p>}
+                  <span>Last Name</span>
+                  <input type="text" {...register("lastName")} />
+                </div>
+                <div className="number">
+                  <span>Number#</span>
+                  <input type="text" {...register("number")} />
+                </div>
+                <div className="address">
+                  <span>Adress</span>
+                  <input
+                    type="text"
+                    {...register("address", { required: true, maxLength: 150 })}
+                  />
+                  {errors.address && <p>Address is required.</p>}
+                </div>
+                <div className="card">
+                  <span>card Number</span>
+
+                  <input
+                    type="text"
+                    {...register("card_number", {
+                      required: true,
+                      maxLength: 11,
+                    })}
+                  />
+                  {errors.card_number && <p>Card Number is required.</p>}
+
+                  <span>CSV</span>
+                  <input
+                    type="text"
+                    className="csv"
+                    {...register("csv", { required: true, maxLength: 3 })}
+                  />
+                  {errors.csv && <p>csv is required.</p>}
+                </div>
+                <CartButton onClick={handleSubmit}>Place Order</CartButton>
+              </form>
+            </ConatinerForm>
+            <Container>
+              <ProductConatiner>
+                {cartItems.map(
+                  (
+                    {
+                      PRoduct_image,
+                      Product_Name,
+                      Product_price,
+                      Product_quantity,
+                    },
+                    index
+                  ) => (
+                    <Items
+                      PRoduct_image={PRoduct_image}
+                      Product_Name={Product_Name}
+                      Product_price={Product_price}
+                      Product_quantity={Product_quantity}
+                      setCartItems={setCartItems}
+                      index={index}
+                    />
+                  )
+                )}
+                <PriceConatiner>
+                  <ProductTitle>Total</ProductTitle>
+                  <div>${total}</div>
+                </PriceConatiner>
+              </ProductConatiner>
+            </Container>
+          </>
+        ) : (
+          <NoConatinerForm>
+            <NoProductTitle>The cart is empty</NoProductTitle>
+          </NoConatinerForm>
+        )}
+      </Section>
+    </CartSection>
   );
 };
 

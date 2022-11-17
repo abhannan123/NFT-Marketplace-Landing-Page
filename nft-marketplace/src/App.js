@@ -3,6 +3,8 @@ import Navigation from "./Components/Navigation";
 import Home from "./Components/Sections/Home";
 import About from "./Components/Sections/About";
 import GlobalStyles from "./Styles/GlobalStyles";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Footer from "./Components/Footer";
 import { light } from "./Styles/Themes";
@@ -20,6 +22,7 @@ function App() {
       <GlobalStyles />
       <ThemeProvider theme={light}>
         <Navigation />
+        <ToastContainer />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/about" element={<About />} />
