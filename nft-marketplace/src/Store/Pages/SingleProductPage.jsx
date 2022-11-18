@@ -190,6 +190,9 @@ const SingleProductPage = () => {
       Product_quantity: 1,
     }));
   }, [data]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const localData = getCookie("product") && JSON.parse(getCookie("product"));
   const handleCart = () => {
     let newCartItems;
