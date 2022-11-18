@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import CoverVideo from "../../Assets/CoverVideo";
 import FeaturedTypeWrite from "../../Assets/FeaturedTypeWrite";
@@ -9,6 +10,7 @@ import ShowCase from "./ShowCase";
 import useWindowSize from "react-use/lib/useWindowSize";
 
 import Confetti from "react-confetti";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const Section = styled.section`
@@ -72,14 +74,24 @@ const Home = () => {
     }
   `;
   const { width, height } = useWindowSize();
-  const images = [
-    "images/download.jpeg",
-    "images/download.jpeg",
-    "images/download.jpeg",
-    "images/download.jpeg",
-    "images/download.jpeg",
-    "images/download.jpeg",
-  ];
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const response = await axios.get(
+          "https://ecommercetestproject.herokuapp.com/api/products/featured"
+        );
+        console.log({ response });
+        setProducts(response?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProducts();
+  }, []);
+  console.log({ products });
   return (
     <Section id="Home">
       {/* <Confetti width={width} height={height} gravity={0.1}></Confetti> */}
@@ -98,8 +110,14 @@ const Home = () => {
           <FeaturedTypeWrite />
         </FeatureBox>
         <ProductBox>
-          {images.map((images) => (
-            <Product img={images} />
+          {products.map((data) => (
+            <Link to={`/products/${data?.id}`}>
+              <Product
+                img={data?.image_url}
+                title={data?.title}
+                price={data?.price}
+              />
+            </Link>
           ))}
         </ProductBox>
       </Container>

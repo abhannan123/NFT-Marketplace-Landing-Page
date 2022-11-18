@@ -32,7 +32,8 @@ const Product = ({
   font-size:${(props) => props.theme.fontsm}
   text-transform: capitalize;
   color: ${(props) => props.theme.text};
-  width: 100px;
+  width: 80px;
+  height:20px;
   overflow: hidden;
   text-overflow: ellipsis;
   `;
