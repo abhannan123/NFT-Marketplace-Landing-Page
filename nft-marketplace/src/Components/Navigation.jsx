@@ -4,6 +4,10 @@ import styled from "styled-components";
 import Button from "../Assets/Button";
 import WhiteButton from "../Assets/WhiteButton";
 import Logo from "../Assets/Logo";
+import { LOGIN_MODAL } from "../Store/actions/actionTypees";
+
+import { useDispatch, useSelector } from "react-redux";
+import { loginModal, SignupModal } from "../Store/actions/models";
 const Navigation = () => {
   const Section = styled.section`
     width: 100vw;
@@ -120,8 +124,19 @@ const Navigation = () => {
       display: flex;
     }
   `;
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
+  const { isLoginOpen, isSignUpOpen } = useSelector((state) => state);
+
+  const handleLoginToggle = () => {
+    dispatch(loginModal(!isLoginOpen));
+
+    //handleCustomMenuClose()
+  };
+  const handleSignUpToogle = () => {
+    dispatch(SignupModal(!isSignUpOpen));
+  };
   return (
     <Section>
       <NavBar>
@@ -148,16 +163,16 @@ const Navigation = () => {
             <div className="mobile">
               {" "}
               <div>
-                <WhiteButton text="Login" />
+                <WhiteButton text="Login" onClick={handleLoginToggle} />
               </div>
-              <Button text="Register"></Button>
+              <Button text="Register" onClick={handleSignUpToogle}></Button>
             </div>
           </MenuItem>
         </Menu>
         <div className="dekstop">
           {" "}
-          <WhiteButton text="Login" />
-          <Button text="Register"></Button>
+          <WhiteButton text="Login" onClick={handleLoginToggle} />
+          <Button text="Register" onClick={handleSignUpToogle}></Button>
         </div>
       </NavBar>
     </Section>

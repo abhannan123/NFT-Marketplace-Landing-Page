@@ -107,7 +107,6 @@ const Items = ({
     setCartItems((prev) => {
       let copyPrev = [...prev];
 
-      console.log({ prev });
       copyPrev.splice(index, 1);
       setCookie("product", JSON.stringify(copyPrev));
 

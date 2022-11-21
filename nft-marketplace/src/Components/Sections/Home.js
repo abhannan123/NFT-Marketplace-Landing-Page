@@ -83,7 +83,7 @@ const Home = () => {
         const response = await axios.get(
           "https://ecommercetestproject.herokuapp.com/api/products/featured"
         );
-        console.log({ response });
+
         setProducts(response?.data);
       } catch (error) {
         console.log(error);
@@ -91,7 +91,7 @@ const Home = () => {
     };
     getProducts();
   }, []);
-  console.log({ products });
+
   return (
     <Section id="Home">
       {/* <Confetti width={width} height={height} gravity={0.1}></Confetti> */}

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Button = ({ text, link }) => {
+const Button = ({ text, link, onClick }) => {
   const Btn = styled.button`
     display: inline-block;
     background-color: ${(props) => props.theme.text};
@@ -34,7 +34,7 @@ const Button = ({ text, link }) => {
     }
   `;
   return (
-    <Btn>
+    <Btn onClick={onClick}>
       <a href={link} aria-label={text} target="blank">
         {text}
       </a>
