@@ -10,7 +10,7 @@ import ShowCase from "./ShowCase";
 import useWindowSize from "react-use/lib/useWindowSize";
 
 import Confetti from "react-confetti";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const Home = () => {
   const Section = styled.section`
