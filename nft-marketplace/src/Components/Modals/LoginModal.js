@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
+
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { LOGIN_MODAL } from "../../Store/actions/actionTypees";
 import { loginModal, SignupModal } from "../../Store/actions/models";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+
 const LoginModal = () => {
   const { isLoginOpen, isSignUpOpen } = useSelector((state) => state);
 
@@ -180,6 +182,7 @@ const LoginModal = () => {
   const onSubmit = (data) => {
     signIn(data);
   };
+
   return (
     <Section>
       <Modal
@@ -197,7 +200,6 @@ const LoginModal = () => {
                 type="email"
                 {...register("email", {
                   required: true,
-                  maxLength: 20,
                 })}
               />
               {errors.email && <p>Email is required.</p>}

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../Assets/Button";
 import WhiteButton from "../Assets/WhiteButton";
 import Logo from "../Assets/Logo";
 import { LOGIN_MODAL } from "../Store/actions/actionTypees";
-
+import { getCookie, removeCookie } from "../cookies/Cookies";
 import { useDispatch, useSelector } from "react-redux";
-import { loginModal, SignupModal } from "../Store/actions/models";
+import { loginModal, logoutUser, SignupModal } from "../Store/actions/models";
 const Navigation = () => {
   const Section = styled.section`
     width: 100vw;
@@ -126,8 +126,9 @@ const Navigation = () => {
   `;
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const user = getCookie("user") && JSON.parse(getCookie("user"));
 
-  const { isLoginOpen, isSignUpOpen } = useSelector((state) => state);
+  const { isLoginOpen, isSignUpOpen, isLogout } = useSelector((state) => state);
 
   const handleLoginToggle = () => {
     dispatch(loginModal(!isLoginOpen));
@@ -137,6 +138,13 @@ const Navigation = () => {
   const handleSignUpToogle = () => {
     dispatch(SignupModal(!isSignUpOpen));
   };
+  const handleLogout = () => {
+    dispatch(logoutUser(true));
+    removeCookie("user");
+    Navigate("/");
+    dispatch(logoutUser(false));
+  };
+
   return (
     <Section>
       <NavBar>
@@ -163,16 +171,36 @@ const Navigation = () => {
             <div className="mobile">
               {" "}
               <div>
-                <WhiteButton text="Login" onClick={handleLoginToggle} />
+                <WhiteButton text="Login" />
               </div>
-              <Button text="Register" onClick={handleSignUpToogle}></Button>
+              <Button text="Register"></Button>
+              {user ? (
+                <>
+                  <Button text="Signout"></Button>
+                </>
+              ) : (
+                <>
+                  <WhiteButton text="Login" onClick={handleLoginToggle} />
+                  <Button text="Register" onClick={handleSignUpToogle}></Button>
+                </>
+              )}
             </div>
           </MenuItem>
         </Menu>
         <div className="dekstop">
           {" "}
-          <WhiteButton text="Login" onClick={handleLoginToggle} />
-          <Button text="Register" onClick={handleSignUpToogle}></Button>
+          <WhiteButton text="Login" />
+          <Button text="Register"></Button>
+          {user ? (
+            <>
+              <Button text="Signout" onClick={handleLogout}></Button>
+            </>
+          ) : (
+            <>
+              <WhiteButton text="Login" onClick={handleLoginToggle} />
+              <Button text="Register" onClick={handleSignUpToogle}></Button>
+            </>
+          )}{" "}
         </div>
       </NavBar>
     </Section>

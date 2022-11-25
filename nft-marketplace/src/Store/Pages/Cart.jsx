@@ -277,7 +277,7 @@ const Cart = () => {
                   <span>Adress</span>
                   <input
                     type="text"
-                    {...register("address", { required: true, maxLength: 150 })}
+                    {...register("address", { required: true, maxLength: 250 })}
                   />
                   {errors.address && <p>Address is required.</p>}
                 </div>

@@ -4,6 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { loginModal, SignupModal } from "../../Store/actions/models";
+
+import { toast } from "react-toastify";
+import { Navigate } from "react-router-dom";
+import axios from "axios";
+
 const RegisterModal = () => {
   const { isLoginOpen, isSignUpOpen } = useSelector((state) => state);
 
@@ -27,6 +32,8 @@ const RegisterModal = () => {
       height: 30px;
       /* margin-right: 50px; */
       border-radius: 10px;
+
+      padding: 20px 15px;
     }
     span {
       margin-right: 50px;
@@ -156,8 +163,34 @@ const RegisterModal = () => {
       transform: "translate(-50%, -50%)",
     },
   };
+
+  const signUp = async (data) => {
+    const order = {
+      email: data?.email,
+      password: data?.password,
+      password_confirmation: data?.confirmpassword,
+    };
+
+    try {
+      const response = axios
+        .post("https://ecommercetestproject.herokuapp.com/users", order)
+        .then((response) => {
+          // toast.success(data?.data?.message);
+          if (response?.status == 200) {
+            toast.success("Your Account created");
+            handleLoginToogle();
+            // Navigate("/");
+          } else {
+            toast.error(response?.data?.title);
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onSubmit = (data) => {
-    console.log({ data });
+    signUp(data);
   };
   return (
     <Section>
@@ -176,7 +209,6 @@ const RegisterModal = () => {
                 type="email"
                 {...register("email", {
                   required: true,
-                  maxLength: 20,
                 })}
               />
               {errors.email && <p>Email is required.</p>}
@@ -186,7 +218,7 @@ const RegisterModal = () => {
               <span>Password</span>
               <input
                 type="password"
-                {...register("confirmpassword", { required: true })}
+                {...register("password", { required: true })}
               />
               {errors.password && <p>confirm Password is required.</p>}
             </div>
