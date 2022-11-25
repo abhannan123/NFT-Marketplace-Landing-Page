@@ -4,13 +4,10 @@ import styled from "styled-components";
 import Button from "../Assets/Button";
 import WhiteButton from "../Assets/WhiteButton";
 import Logo from "../Assets/Logo";
-<<<<<<< Updated upstream
-=======
 import { LOGIN_MODAL } from "../Store/actions/actionTypees";
 import { getCookie, removeCookie } from "../cookies/Cookies";
 import { useDispatch, useSelector } from "react-redux";
 import { loginModal, logoutUser, SignupModal } from "../Store/actions/models";
->>>>>>> Stashed changes
 const Navigation = () => {
   const Section = styled.section`
     width: 100vw;
@@ -127,11 +124,10 @@ const Navigation = () => {
       display: flex;
     }
   `;
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const user = getCookie("user") && JSON.parse(getCookie("user"));
 
-<<<<<<< Updated upstream
-=======
   const { isLoginOpen, isSignUpOpen, isLogout } = useSelector((state) => state);
 
   const handleLoginToggle = () => {
@@ -149,7 +145,6 @@ const Navigation = () => {
     dispatch(logoutUser(false));
   };
 
->>>>>>> Stashed changes
   return (
     <Section>
       <NavBar>
@@ -175,12 +170,10 @@ const Navigation = () => {
           <MenuItem>
             <div className="mobile">
               {" "}
-<<<<<<< Updated upstream
               <div>
                 <WhiteButton text="Login" />
               </div>
               <Button text="Register"></Button>
-=======
               {user ? (
                 <>
                   <Button text="Signout"></Button>
@@ -191,16 +184,13 @@ const Navigation = () => {
                   <Button text="Register" onClick={handleSignUpToogle}></Button>
                 </>
               )}
->>>>>>> Stashed changes
             </div>
           </MenuItem>
         </Menu>
         <div className="dekstop">
-<<<<<<< Updated upstream
           {" "}
           <WhiteButton text="Login" />
           <Button text="Register"></Button>
-=======
           {user ? (
             <>
               <Button text="Signout" onClick={handleLogout}></Button>
@@ -211,7 +201,6 @@ const Navigation = () => {
               <Button text="Register" onClick={handleSignUpToogle}></Button>
             </>
           )}{" "}
->>>>>>> Stashed changes
         </div>
       </NavBar>
     </Section>

@@ -1,26 +1,13 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-<<<<<<< Updated upstream
 
-const LoginModal = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-  return (
-    <div>
-      <Modal isOpen={isOpen} onRequestClose={closeModal} contentLabel="LOGIN">
-        <div>Here is i</div>
-=======
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { LOGIN_MODAL } from "../../Store/actions/actionTypees";
 import { loginModal, SignupModal } from "../../Store/actions/models";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { setCookie, getCookie } from "./../../cookies/Cookies";
-import { toast } from "react-toastify";
-import { Navigate } from "react-router-dom";
+
 const LoginModal = () => {
   const { isLoginOpen, isSignUpOpen } = useSelector((state) => state);
 
@@ -44,7 +31,6 @@ const LoginModal = () => {
       height: 30px;
       /* margin-right: 50px; */
       border-radius: 10px;
-      padding: 20px 15px;
     }
     span {
       margin-right: 50px;
@@ -159,9 +145,6 @@ const LoginModal = () => {
       width: 100%;
     }
   `;
-  const user = getCookie("user") && JSON.parse(getCookie("user"));
-  console.log({ user });
-  // const { user_type } = user?.user || {};
   const {
     register,
     handleSubmit,
@@ -187,15 +170,9 @@ const LoginModal = () => {
     try {
       const response = axios
         .post("https://ecommercetestproject.herokuapp.com/oauth/token", order)
-        .then((response) => {
+        .then((data) => {
           // toast.success(data?.data?.message);
-          if (response?.status == 200) {
-            setCookie("user", JSON.stringify(response?.data?.access_token));
-            handleLoginToogle();
-            Navigate("/");
-          } else {
-            toast.error(response?.data?.title);
-          }
+          console.log(data);
         });
     } catch (error) {
       console.log(error);
@@ -205,6 +182,7 @@ const LoginModal = () => {
   const onSubmit = (data) => {
     signIn(data);
   };
+
   return (
     <Section>
       <Modal
@@ -238,9 +216,8 @@ const LoginModal = () => {
           </form>
           <CartButton2 onClick={handleSignUpToogle}>SignUp</CartButton2>
         </FormConatiner>
->>>>>>> Stashed changes
       </Modal>
-    </div>
+    </Section>
   );
 };
 

@@ -1,14 +1,14 @@
-<<<<<<< Updated upstream
-=======
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { loginModal, SignupModal } from "../../Store/actions/models";
+
 import { toast } from "react-toastify";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
+
 const RegisterModal = () => {
   const { isLoginOpen, isSignUpOpen } = useSelector((state) => state);
 
@@ -32,6 +32,7 @@ const RegisterModal = () => {
       height: 30px;
       /* margin-right: 50px; */
       border-radius: 10px;
+
       padding: 20px 15px;
     }
     span {
@@ -162,6 +163,7 @@ const RegisterModal = () => {
       transform: "translate(-50%, -50%)",
     },
   };
+
   const signUp = async (data) => {
     const order = {
       email: data?.email,
@@ -242,4 +244,3 @@ const RegisterModal = () => {
 };
 
 export default RegisterModal;
->>>>>>> Stashed changes
