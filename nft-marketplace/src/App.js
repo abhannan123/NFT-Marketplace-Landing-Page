@@ -11,7 +11,7 @@ import { light } from "./Styles/Themes";
 import RoadMap from "./Components/Sections/RoadMap";
 import ShowCase from "./Components/Sections/ShowCase";
 import Team from "./Components/Sections/Team";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import CategoriesPage from "./Components/Sections/CategoriesPage";
 import ProductPage from "./Store/Pages/ProductPage";
 import SingleProductPage from "./Store/Pages/SingleProductPage";
@@ -38,6 +38,7 @@ function App() {
               element={<SingleProductPage />}
             />
             <Route exact path="/cart" element={<Cart />} />
+            <Route exact path="*" element={<Navigate to="/" />} />
           </Routes>
           <LoginModal />
           <RegisterModal />
