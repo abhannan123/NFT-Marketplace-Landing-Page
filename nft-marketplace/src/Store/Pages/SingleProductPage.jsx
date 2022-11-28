@@ -6,6 +6,9 @@ import styled from "styled-components";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { setCookie, getCookie } from "../../cookies/Cookies";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { loginModal } from "../actions/models";
 
 const CartSection = styled.div`
   width: 85%;
@@ -164,10 +167,13 @@ const settings = {
 const SingleProductPage = () => {
   const [data, setData] = useState({});
   const [product, setProduct] = useState({});
-
+  const user = getCookie("user") && JSON.parse(getCookie("user"));
   const URL = `https://ecommercetestproject.herokuapp.com/api`;
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isLoginOpen, isSignUpOpen, isLogout } = useSelector((state) => state);
+
   useEffect(() => {
     const getSingleProduct = async () => {
       try {
@@ -193,6 +199,11 @@ const SingleProductPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const handleLoginToggle = () => {
+    dispatch(loginModal(!isLoginOpen));
+
+    //handleCustomMenuClose()
+  };
   const localData = getCookie("product") && JSON.parse(getCookie("product"));
   const handleCart = () => {
     let newCartItems;
@@ -201,8 +212,13 @@ const SingleProductPage = () => {
     } else {
       newCartItems = [product];
     }
-    setCookie("product", JSON.stringify(newCartItems));
-    navigate("/cart");
+    if (user) {
+      setCookie("product", JSON.stringify(newCartItems));
+      navigate("/cart");
+    } else {
+      toast.error("please Login First");
+      handleLoginToggle();
+    }
   };
 
   const settings = {

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Button from "../Assets/Button";
 import WhiteButton from "../Assets/WhiteButton";
 import Logo from "../Assets/Logo";
+import useUserLogout from "../Hooks/useUserLogout";
 import { LOGIN_MODAL } from "../Store/actions/actionTypees";
 import { getCookie, removeCookie } from "../cookies/Cookies";
 import { useDispatch, useSelector } from "react-redux";
@@ -127,7 +128,7 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const user = getCookie("user") && JSON.parse(getCookie("user"));
-  console.log({ user });
+
   const { isLoginOpen, isSignUpOpen, isLogout } = useSelector((state) => state);
 
   const handleLoginToggle = () => {
@@ -138,12 +139,13 @@ const Navigation = () => {
   const handleSignUpToogle = () => {
     dispatch(SignupModal(!isSignUpOpen));
   };
-  const handleLogout = () => {
-    dispatch(logoutUser(true));
-    removeCookie("user");
-    Navigate("/");
-    dispatch(logoutUser(false));
-  };
+  const logOut = useUserLogout();
+  // const handleLogout = () => {
+  //   dispatch(logoutUser(true));
+  //   removeCookie("user");
+  //   Navigate("/");
+  //   dispatch(logoutUser(false));
+  // };
 
   return (
     <Section>
@@ -164,15 +166,13 @@ const Navigation = () => {
           <Link to="/categories">
             <MenuItem>Categories</MenuItem>
           </Link>
-          <Link to="/cart">
-            <MenuItem>Cart</MenuItem>
-          </Link>
+          <Link to="/cart">{user && <MenuItem>Cart</MenuItem>}</Link>
           <MenuItem>
             <div className="mobile">
               {" "}
               {user ? (
                 <>
-                  <Button text="Signout"></Button>
+                  <Button text="Signout" onClick={logOut}></Button>
                 </>
               ) : (
                 <>
@@ -187,7 +187,7 @@ const Navigation = () => {
           {" "}
           {user ? (
             <>
-              <Button text="Signout" onClick={handleLogout}></Button>
+              <Button text="Signout" onClick={logOut}></Button>
             </>
           ) : (
             <>

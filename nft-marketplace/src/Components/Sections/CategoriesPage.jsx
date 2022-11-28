@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-
+import useFetch from "../../Hooks/useFetch";
 import Categories from "./Categories";
 import { Link } from "react-router-dom";
+import { doGet } from "../../api/httpRequest";
 
 const Container = styled.div`
   width: 85%;
@@ -32,20 +33,28 @@ const Container = styled.div`
 `;
 const CategoriesPage = () => {
   const [categories, setCategories] = useState([]);
+
+  const { data } = useFetch(
+    "https://ecommercetestproject.herokuapp.com/api/categories"
+  );
+
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const response = await axios.get(
-          "https://ecommercetestproject.herokuapp.com/api/categories"
-        );
-        setCategories(response?.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getProducts();
-  }, []);
-  console.log({ categories });
+    setCategories(data);
+  }, [data]);
+  // useEffect(() => {
+  //   const getProducts = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "https://ecommercetestproject.herokuapp.com/api/categories"
+  //       );
+  //       setCategories(response?.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getProducts();
+  // }, []);
+
   const images = [
     "images/download.jpeg",
     "images/download.jpeg",

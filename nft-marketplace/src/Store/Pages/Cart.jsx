@@ -5,7 +5,7 @@ import { getCookie } from "../../cookies/Cookies";
 import Items from "./Items";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import withUserRoute from "../../hoc/withUserRoute";
 const CartSection = styled.div`
   width: 85%;
   margin: auto;
@@ -343,4 +343,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default withUserRoute(Cart);
