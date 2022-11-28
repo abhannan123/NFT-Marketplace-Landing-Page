@@ -127,7 +127,7 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const user = getCookie("user") && JSON.parse(getCookie("user"));
-
+  console.log({ user });
   const { isLoginOpen, isSignUpOpen, isLogout } = useSelector((state) => state);
 
   const handleLoginToggle = () => {
@@ -170,10 +170,6 @@ const Navigation = () => {
           <MenuItem>
             <div className="mobile">
               {" "}
-              <div>
-                <WhiteButton text="Login" />
-              </div>
-              <Button text="Register"></Button>
               {user ? (
                 <>
                   <Button text="Signout"></Button>
@@ -189,8 +185,6 @@ const Navigation = () => {
         </Menu>
         <div className="dekstop">
           {" "}
-          <WhiteButton text="Login" />
-          <Button text="Register"></Button>
           {user ? (
             <>
               <Button text="Signout" onClick={handleLogout}></Button>
