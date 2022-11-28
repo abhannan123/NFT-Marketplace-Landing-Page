@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-
+import { setCookie, getCookie } from "../../cookies/Cookies";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { LOGIN_MODAL } from "../../Store/actions/actionTypees";
 import { loginModal, SignupModal } from "../../Store/actions/models";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { toast } from "react-toastify";
+
+import { Navigate } from "react-router-dom";
 
 const LoginModal = () => {
   const { isLoginOpen, isSignUpOpen } = useSelector((state) => state);
@@ -160,6 +163,11 @@ const LoginModal = () => {
       transform: "translate(-50%, -50%)",
     },
   };
+  const user = getCookie("user") && JSON.parse(getCookie("user"));
+  const onSubmit = (data) => {
+    signIn(data);
+    console.log(user);
+  };
   const signIn = async (data) => {
     const order = {
       email: data?.email,
@@ -171,16 +179,17 @@ const LoginModal = () => {
       const response = axios
         .post("https://ecommercetestproject.herokuapp.com/oauth/token", order)
         .then((data) => {
+          if (data?.status == 200) {
+            setCookie("user", JSON.stringify(data?.data?.access_token));
+            console.log(data?.data?.access_token);
+            handleLoginToogle();
+            Navigate.push("/");
+          } else toast.error(data?.data?.status);
           // toast.success(data?.data?.message);
-          console.log(data);
         });
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const onSubmit = (data) => {
-    signIn(data);
   };
 
   return (
