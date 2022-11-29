@@ -11,6 +11,7 @@ import useWindowSize from "react-use/lib/useWindowSize";
 
 import Confetti from "react-confetti";
 import { Link, Navigate } from "react-router-dom";
+import useFetch from "../../Hooks/useFetch";
 
 const Home = () => {
   const Section = styled.section`
@@ -74,22 +75,29 @@ const Home = () => {
     }
   `;
   const { width, height } = useWindowSize();
-
+  const URL =
+    "https://ecommercetestproject.herokuapp.com/api/products/featured";
   const [products, setProducts] = useState([]);
-
+  const { data } = useFetch(URL);
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const response = await axios.get(
-          "https://ecommercetestproject.herokuapp.com/api/products/featured"
-        );
+    setProducts(data);
+  }, [data]);
+  // useEffect(() => {
+  //   const getProducts = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "https://ecommercetestproject.herokuapp.com/api/products/featured"
+  //       );
 
-        setProducts(response?.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getProducts();
+  //       setProducts(response?.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getProducts();
+  // }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
 
   return (

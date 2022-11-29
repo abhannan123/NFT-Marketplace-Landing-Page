@@ -9,6 +9,7 @@ import { setCookie, getCookie } from "../../cookies/Cookies";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { loginModal } from "../actions/models";
+import useFetch from "../../Hooks/useFetch";
 
 const CartSection = styled.div`
   width: 85%;
@@ -165,7 +166,7 @@ const settings = {
   slidesToScroll: 1,
 };
 const SingleProductPage = () => {
-  const [data, setData] = useState({});
+  // const [data, setData] = useState({});
   const [product, setProduct] = useState({});
   const user = getCookie("user") && JSON.parse(getCookie("user"));
   const URL = `https://ecommercetestproject.herokuapp.com/api`;
@@ -173,19 +174,20 @@ const SingleProductPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoginOpen, isSignUpOpen, isLogout } = useSelector((state) => state);
+  const { data } = useFetch(`${URL}/products/${id}`);
 
-  useEffect(() => {
-    const getSingleProduct = async () => {
-      try {
-        const response = await axios.get(`${URL}/products/${id}`);
+  // useEffect(() => {
+  //   const getSingleProduct = async () => {
+  //     try {
+  //       const response = await axios.get(`${URL}/products/${id}`);
 
-        setData(response?.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getSingleProduct();
-  }, []);
+  //       setData(response?.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getSingleProduct();
+  // }, []);
   useEffect(() => {
     setProduct((prev) => ({
       ...prev,

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Product from "../../Assets/Product";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import useFetch from "../../Hooks/useFetch";
 const Container = styled.div`
   width: 75%;
   margin: 2rem auto;
@@ -53,20 +54,24 @@ const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const URL = `https://ecommercetestproject.herokuapp.com/api`;
   const { id } = useParams();
+  const { data } = useFetch(`${URL}/categories/${id}`);
 
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const response = await axios.get(`${URL}/categories/${id}`);
+    setProducts(data);
+  }, [data]);
+  // useEffect(() => {
+  //   const getProducts = async () => {
+  //     try {
+  //       const response = await axios.get(`${URL}/categories/${id}`);
 
-        setProducts(response?.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getProducts();
-  }, []);
-  console.log({ products });
+  //       setProducts(response?.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getProducts();
+  // }, []);
+
   return (
     <>
       {products.length > 0 ? (
