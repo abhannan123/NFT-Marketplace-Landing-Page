@@ -34,6 +34,7 @@ const LoginModal = () => {
       height: 30px;
       /* margin-right: 50px; */
       border-radius: 10px;
+      padding: 20px 15px;
     }
     span {
       margin-right: 50px;
