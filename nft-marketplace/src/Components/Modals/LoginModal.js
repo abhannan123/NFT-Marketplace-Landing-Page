@@ -167,7 +167,6 @@ const LoginModal = () => {
   const user = getCookie("user") && JSON.parse(getCookie("user"));
   const onSubmit = (data) => {
     signIn(data);
-    console.log(user);
   };
   const signIn = async (data) => {
     const order = {
@@ -182,7 +181,7 @@ const LoginModal = () => {
         .then((data) => {
           if (data?.status == 200) {
             setCookie("user", JSON.stringify(data?.data?.access_token));
-            console.log(data?.data?.access_token);
+
             handleLoginToogle();
             Navigate.push("/");
           } else toast.error(data?.data?.status);

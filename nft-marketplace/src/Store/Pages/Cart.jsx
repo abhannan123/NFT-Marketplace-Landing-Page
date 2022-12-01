@@ -236,7 +236,6 @@ const Cart = () => {
         .post("https://ecommercetestproject.herokuapp.com/api/orders", order)
         .then((data) => {
           toast.success(data?.data?.message);
-          // console.log();
         });
     } catch (error) {
       console.log(error);
@@ -244,7 +243,6 @@ const Cart = () => {
   };
 
   const onSubmit = (data) => {
-    // console.log(data);
     setOrder(data);
   };
 
